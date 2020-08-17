@@ -1,0 +1,60 @@
+拼音
+https://blog.csdn.net/Bokman/article/details/99859190
+opencv+qt环境
+https://blog.csdn.net/qq_41923091/article/details/100980627
+
+
+//换源
+gedit /etc/apt/sources.list
+deb http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main non-free contrib
+deb-src http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main non-free contrib
+ 
+gedit /etc/apt/sources.list.d/raspi.list
+deb http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/ buster main ui
+
+apt-get update
+
+//中文输入法
+sudo apt-get install fcitx fcitx-googlepinyin fcitx-module-cloudpinyin fcitx-sunpinyin
+reboot
+
+//测试相机
+raspistill -t 2000 -o image.bmp -w 1920 -h 1080
+
+
+//固定IP
+gedit /etc/dhcpcd.conf
+
+interface eth0 # 指定静态IP，/24表示子网掩码为 255.255.255.0
+static ip_address=192.168.178.100/24# 路由器/网关IP地址\
+static routers=192.168.178.1# 手动自定义DNS服务器
+static domain_name_servers=114.114.114.114
+
+//opencv
+sudo apt-get install build-essential cmake git pkg-config libjpeg8-dev libtiff5-dev libjasper-dev libpng12-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libgtk2.0-dev libatlas-base-dev gfortran
+
+wget -O opencv-3.4.1.zip https://github.com/Itseez/opencv/archive/3.4.1.zip 
+unzip opencv-3.4.1.zip
+cd opencv-3.4.1
+mkdir build
+cd build
+
+//cmake命令行文本执行
+//新建,打开./my_cmake.sh
+cmake -D CMAKE_BUILD_TYPE=RELEASE \
+-D BUILD_opencv_python3=OFF \  
+-D BUILD_opencv_python2=OFF \
+-D CMAKE_INSTALL_PREFIX=/usr/local \
+-D INSTALL_PYTHON_EXAMPLES=OFF \
+-D BUILD_EXAMPLES=ON ..
+
+make -j4
+make install
+
+ldconfig
+./configure --host=arm-none-linux-gnueabi --prefix=/home/pi/modbuslib/libmodbus-3.1.6/install
+
+ sudo ln -sf /usr/lib/libmodbus.so.5 /usr/lib/libmodbus.so.5
+
+
+

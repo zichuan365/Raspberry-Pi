@@ -1,0 +1,24 @@
+#modbus
+INCLUDEPATH+=/home/pi/Libs/modbus/install/include/modbus/
+LIBS+=/home/pi/Libs/modbus/install/lib/libmodbus.so
+
+#fopenmp
+QMAKE_CFLAGS+= -fopenmp
+LIBS+= -fopenmp
+
+#pthread
+LIBS += -lpthread
+#LIBS+= /usr/lib/arm-linux-gnueabihf/libpthread.so
+
+#Raspicam
+INCLUDEPATH += \
+/usr/local/include/raspicam
+LIBS +=/usr/local/lib/libraspicam.so
+LIBS +=/usr/local/lib/libraspicam_cv.so
+
+#Opencv
+INCLUDEPATH += \
+/usr/local/include \
+/usr/local/include/opencv \
+/usr/local/include/opencv2
+LIBS +=/usr/local/lib/libopencv_*.so

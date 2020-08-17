@@ -1,0 +1,4 @@
+在树莓派进行液面检测检测的开发
+
+1.Pretreatment：预处理程序，生产对应的xml文件
+2.Pretreatment：实际的算法程序
